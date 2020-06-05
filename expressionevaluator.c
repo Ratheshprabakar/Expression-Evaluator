@@ -1,10 +1,14 @@
+#include<stdio.h>
+void addition();
+int size,i,temp;
+int result=0,value=1;
 int main()
 {
+	int choice;
 	while(1)
-	{
-		int choice;
+	{	
 		printf("---Calculator---\n");
-		printf("1.ADDITION\n2. SUBTRACTION\n3. MULTIPLICATION\n 4. DIVISION\n Enter your choice\n");
+		printf("1.ADDITION\n2. SUBTRACTION\n3. MULTIPLICATION\n4. DIVISION\nEnter your choice\n");
 		scanf("%d",&choice);
 		switch(choice)
 		{
@@ -13,7 +17,7 @@ int main()
 				addition();
 				break;		
 			}	
-			case 2:
+			/*case 2:
 			{
 				subtraction();
 				break;
@@ -27,8 +31,25 @@ int main()
 			{
 				division();
 				break;	
+			}*/
+			default:
+			{
+				printf("Enter the valid Choice\n");
+				break;
 			}
 		}
 	}
 
+}
+void addition()
+{
+	printf("Enter Number of Operands to add\t");
+	scanf("%d",&size);
+	printf("Enter the %d operands\n",size);
+	for(i=0;i<size;i++)
+	{
+		scanf("%d",&temp);
+		result+=temp;
+	}	
+	printf("\n\n|The result of addition of %d numbers are %d|\n",size,result);
 }
