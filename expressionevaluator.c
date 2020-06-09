@@ -7,9 +7,9 @@ void division();
 void balancing_symbols();
 int checkexpression(char temp1, char temp2);
 int *input_array;
-char exp[100],stack[100];
+char exp[100]={'4','+','5'},stack[100];
 int size,i,top=-1,validity,flag=0,temp;
-int result=0,value=1,x;
+int result=0,value=1,x,c=1;
 int main()
 {
 	int choice;
@@ -124,38 +124,49 @@ void division()
 void balancing_symbols()
 {
 	printf("Enter an expression:");
-	gets(exp);
 	for(i=0;exp[i]!='\0';i++)
 	{
 		if(exp[i]=='{' || exp[i]=='[' || exp[i]=='(')
 		{
+			flag=1;
 			top++;
 			stack[top]=exp[i];	
 		}	
-		if(exp[i]=='}' || exp[i]==')' || exp[i]==']')
+		else if(exp[i]=='}' || exp[i]==')' || exp[i]==']')
 		{
+			flag=1;
 			temp=top;
 			top--;
 			validity=checkexpression(exp[temp],exp[i]);
 			if(validity==1)
 			{
-				flag=1;
 				continue;
 			}
 			else
 			{
-				flag=0;
-				printf("Invalid");
-				break;
+				printf("Please, Enter the valid expression !");
+				exit(1);
 			}
 		}
+		else
+			c=0;
+		
 	}
 	if(flag==1)
 	{
 		if(top==-1)
+		{
 			printf("Valid");
+			//function call to evaluation		
+		}
 		else
-			printf("Invalid");
+			printf("Please, Enter the valid expression !");
+			exit(1);
+	}
+	else if(c==0 && top==-1)
+	{
+		printf("Valid");
+		//function call to evaluation
 	}
 }
 int checkexpression(char temp1, char temp2)
