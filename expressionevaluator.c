@@ -4,9 +4,12 @@ void addition();
 void subtraction();
 void multiplication();
 void division();
+void balancing_symbols();
+int checkexpression(char temp1, char temp2);
 int *input_array;
-int size,i;
-int result=0,value=1;
+char exp[100],stack[100];
+int size,i,top=-1,validity,flag=0,temp;
+int result=0,value=1,x;
 int main()
 {
 	int choice;
@@ -36,6 +39,12 @@ int main()
 			{
 				division();
 				break;	
+			}
+			case 5:
+			{
+				printf("\nEXPRESSION MODE ON\n");
+				balancing_symbols();
+				//(x==1)?printf("Valid\n"):printf("Not valid\n");	
 			}
 			case 6:
 			{
@@ -111,4 +120,52 @@ void division()
 	}
 	free(input_array);
 	printf("\n\n | The result of division of %d numbers are %d|\n",size,value);
+}
+void balancing_symbols()
+{
+	printf("Enter an expression:");
+	gets(exp);
+	for(i=0;exp[i]!='\0';i++)
+	{
+		if(exp[i]=='{' || exp[i]=='[' || exp[i]=='(')
+		{
+			top++;
+			stack[top]=exp[i];	
+		}	
+		if(exp[i]=='}' || exp[i]==')' || exp[i]==']')
+		{
+			temp=top;
+			top--;
+			validity=checkexpression(exp[temp],exp[i]);
+			if(validity==1)
+			{
+				flag=1;
+				continue;
+			}
+			else
+			{
+				flag=0;
+				printf("Invalid");
+				break;
+			}
+		}
+	}
+	if(flag==1)
+	{
+		if(top==-1)
+			printf("Valid");
+		else
+			printf("Invalid");
+	}
+}
+int checkexpression(char temp1, char temp2)
+{
+	if(temp1=='(' && temp2==')')
+		return 1;
+	else if(temp1=='[' && temp2==']')
+		return 1;
+	else if(temp1 =='{' && temp2=='}')
+		return 1;
+	else
+		return 0;
 }
