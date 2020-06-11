@@ -7,12 +7,13 @@ void division();
 void balancing_symbols();
 int checkexpression(char temp1, char temp2);
 int *input_array;
-char exp[100]={'4','+','5'},stack[100];
+char stack[100];
 int size,i,top=-1,validity,flag=0,temp;
 int result=0,value=1,x,c=1;
 int main()
 {
 	int choice;
+	char exp[100];
 	while(1)
 	{	
 		printf("\n---Calculator---\n");
@@ -123,7 +124,9 @@ void division()
 }
 void balancing_symbols()
 {
-	printf("Enter an expression:");
+	char exp[100];
+	printf("Enter your expression\t");
+	scanf("%s",exp);
 	for(i=0;exp[i]!='\0';i++)
 	{
 		if(exp[i]=='{' || exp[i]=='[' || exp[i]=='(')
